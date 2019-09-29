@@ -55,3 +55,10 @@ function renderTimeBlocks() {
 }
 
 renderTimeBlocks();
+
+// Automatically update time blocks
+setInterval(function(){
+  presentHour = parseInt(moment().format("HH"));
+  renderTimeBlocks();
+  console.log("time blocks rendered");
+}, 60000);
