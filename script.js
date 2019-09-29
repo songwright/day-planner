@@ -25,7 +25,7 @@ function renderTimeBlocks() {
 
     let timeBlockEl = $("<div>").attr("class", "input-group row");
     let hourEl = $("<div>").attr("class", "hour").text(hourName);
-    let inputEl = $("<div>").attr("class", "form-control past").text(taskContent);;
+    let inputEl = $("<textarea>").attr("class", "form-control textarea past").attr("type", "text").text(taskContent);;
     let buttonEl = $("<div>").attr("class", "input-group-append");
     let button = $("<button>").attr("class", "saveBtn").attr("type", "button").text("save");
 
