@@ -1,14 +1,14 @@
 let currentDay = moment().format('dddd, MMMM Do');
 let tasks = [
-  {hour: "9AM", task: ""},
-  {hour: "10AM", task: ""},
-  {hour: "11AM", task: ""},
-  {hour: "12PM", task: ""},
-  {hour: "1PM", task: ""},
-  {hour: "2PM", task: ""},
-  {hour: "3PM", task: ""},
-  {hour: "4PM", task: ""},
-  {hour: "5PM", task: ""}
+  {hour: "9AM", task: "", time: 9},
+  {hour: "10AM", task: "", time: 10},
+  {hour: "11AM", task: "", time: 11},
+  {hour: "12PM", task: "", time: 12},
+  {hour: "1PM", task: "", time: 13},
+  {hour: "2PM", task: "", time: 14},
+  {hour: "3PM", task: "", time: 15},
+  {hour: "4PM", task: "", time: 16},
+  {hour: "5PM", task: "", time: 17}
 ];
 
 // Put today's date in the header.
@@ -22,10 +22,24 @@ function renderTimeBlocks() {
   for (let i = 0; i < tasks.length; i++) {
     let taskContent = tasks[i].task;
     let hourName = tasks[i].hour;
+    let presentHour = parseInt(moment().format("HH"));
+    let thisHour = tasks[i].time;
+    let inputElStyle = "";
+
+    if (thisHour < presentHour) {
+      // Assign past style to textarea
+      inputElStyle = "past";
+    } else {
+      inputElStyle = "future";
+    }
+
+    if (thisHour === presentHour) {
+      inputElStyle = "present";
+    }
 
     let timeBlockEl = $("<div>").attr("class", "input-group row");
     let hourEl = $("<div>").attr("class", "hour").text(hourName);
-    let inputEl = $("<textarea>").attr("class", "form-control textarea past").attr("type", "text").text(taskContent);;
+    let inputEl = $("<textarea>").attr("class", `form-control textarea ${inputElStyle}`).attr("type", "text").text(taskContent);
     let buttonEl = $("<div>").attr("class", "input-group-append");
     let button = $("<button>").attr("class", "saveBtn").attr("type", "button").text("save");
 
@@ -41,7 +55,3 @@ function renderTimeBlocks() {
 }
 
 renderTimeBlocks();
-
-
-
-// let presentTime = moment().format("hA");
