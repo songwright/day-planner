@@ -1,13 +1,47 @@
-// Create rows of task hours
-
-let taskRow = $("<div>").attr("class", "input-group row");
-let hour = $("<div>").attr("class", "hour").text("9AM");
-let input = $("<input>").attr("class", "form-control past");;
-let buttonDiv = $("<div>").attr("class", "input-group-append");
-let button = $("<button>").attr("class", "saveBtn").attr("type", "button").text("save");
 let currentDay = moment().format('dddd, MMMM Do');
+let tasks = [
+  {hour: "9AM", task: ""},
+  {hour: "10AM", task: ""},
+  {hour: "11AM", task: ""},
+  {hour: "12PM", task: ""},
+  {hour: "1PM", task: ""},
+  {hour: "2PM", task: ""},
+  {hour: "3PM", task: ""},
+  {hour: "4PM", task: ""},
+  {hour: "5PM", task: ""}
+];
 
+// Put today's date in the header.
 $("#currentDay").append(currentDay);
-buttonDiv.append(button);
-taskRow.append(hour).append(input).append(buttonDiv);
-$(".container").append(taskRow);
+
+function renderTimeBlocks() {
+  // Clear time blocks element
+  $(".container").empty();
+
+  // Render a new time block for each time.
+  for (let i = 0; i < tasks.length; i++) {
+    let taskContent = tasks[i].task;
+    let hourName = tasks[i].hour;
+
+    let timeBlockEl = $("<div>").attr("class", "input-group row");
+    let hourEl = $("<div>").attr("class", "hour").text(hourName);
+    let inputEl = $("<div>").attr("class", "form-control past").text(taskContent);;
+    let buttonEl = $("<div>").attr("class", "input-group-append");
+    let button = $("<button>").attr("class", "saveBtn").attr("type", "button").text("save");
+
+    // Put a time block in the container
+    $(".container").append(timeBlockEl);
+
+    // Put the button in the button div.
+    buttonEl.append(button);
+
+    // Put the time block elements in a row.
+    timeBlockEl.append(hourEl).append(inputEl).append(buttonEl);
+  }
+}
+
+renderTimeBlocks();
+
+
+
+// let presentTime = moment().format("hA");
