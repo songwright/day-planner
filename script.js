@@ -56,14 +56,22 @@ function renderTimeBlocks() {
   }
 }
 
-// function init() {
-  // Get stored timeBlocks from localStorage
+function init() {
+  // Get stored tasks from localStorage
   // Parse the JSON string to an object
-//   let storedtimeBlocks = JSON.parse(localStorage.getItem("timeBlocks"));
-// }
+  let storedTasks = JSON.parse(localStorage.getItem("tasks"));
+
+  // If tasks were retrieved from localStorage, update the tasks array to it
+  if (storedTasks !== null) {
+    tasks = storedTasks;
+  }
+
+  // Render timeBlocks to the DOM
+  renderTimeBlocks();
+}
 
 function storeTasks() {
-  // Stringify and set "tasks" key in localStorage to todos array
+  // Stringify and set "tasks" key in localStorage to tasks array
   localStorage.setItem("tasks", JSON.stringify(tasks));
 }
 
