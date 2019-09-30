@@ -62,6 +62,11 @@ function renderTimeBlocks() {
 //   let storedtimeBlocks = JSON.parse(localStorage.getItem("timeBlocks"));
 // }
 
+function storeTasks() {
+  // Stringify and set "tasks" key in localStorage to todos array
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+}
+
 renderTimeBlocks();
 
 // Automatically update time blocks
