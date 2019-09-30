@@ -44,11 +44,13 @@ function renderTimeBlocks() {
     let hourEl = $("<div>").attr("class", "hour").text(hourName).css("text-align", "right");
     let inputEl = $("<textarea>").attr("class", `form-control textarea ${inputElStyle}`).attr("type", "text").attr("id", "input" + i).val(taskContent);
     let buttonEl = $("<div>").attr("class", "input-group-append");
-    let button = $("<button>").attr("class", "saveBtn").attr("data-index", i).text("save");
-
+    let button = $("<button>").attr("class", "saveBtn").attr("data-index", i);
+    let lockIcon = $("<i>").attr("class", "fas fa-lock");
+    // <i class="fas fa-lock"></i>
     // Put a time block in the container
     $(".container").append(timeBlockEl);
 
+    button.append(lockIcon);
     // Put the button in the button div.
     buttonEl.append(button);
 
@@ -85,12 +87,12 @@ $(".saveBtn").on("click", function() {
   //Get the data index number from the button.
   let dataIndex = $(this).attr("data-index");
   let textInput = document.getElementById(`input${dataIndex}`).value;
+
   // Add task to array
   tasks.splice(dataIndex, 1, textInput);
 
   storeTasks();
   renderTimeBlocks();
-  
 });
 
 // Automatically update time blocks every five minutes
