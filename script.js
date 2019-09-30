@@ -10,7 +10,7 @@ let timeBlocks = [
   {hour: "4PM", time: 16},
   {hour: "5PM", time: 17}
 ];
-let tasks = [];
+let tasks = ["", "", "", "", "", "", "", "", ""];
 
 // Put today's date in the header.
 $("#currentDay").append(currentDay);
@@ -39,11 +39,12 @@ function renderTimeBlocks() {
       inputElStyle = "present";
     }
 
-    let timeBlockEl = $("<div>").attr("class", "input-group row");
-    let hourEl = $("<div>").attr("class", "hour").text(hourName);
-    let inputEl = $("<textarea>").attr("class", `form-control textarea ${inputElStyle}`).attr("type", "text").text(taskContent);
+    let timeBlockEl = $("<form>").attr("class", "input-group row").attr("method", "post");
+    let hourContainer = $("<div>").attr("class", "col-2");
+    let hourEl = $("<div>").attr("class", "hour").text(hourName).css("text-align", "right");
+    let inputEl = $("<textarea>").attr("class", `form-control textarea ${inputElStyle}`).attr("type", "text").attr("id", "input" + i).val(taskContent);
     let buttonEl = $("<div>").attr("class", "input-group-append");
-    let button = $("<button>").attr("class", "saveBtn").attr("type", "button").text("save");
+    let button = $("<button>").attr("class", "saveBtn").attr("data-index", i).text("save");
 
     // Put a time block in the container
     $(".container").append(timeBlockEl);
@@ -51,8 +52,10 @@ function renderTimeBlocks() {
     // Put the button in the button div.
     buttonEl.append(button);
 
+    hourContainer.append(hourEl);
+
     // Put the time block elements in a row.
-    timeBlockEl.append(hourEl).append(inputEl).append(buttonEl);
+    timeBlockEl.append(hourContainer).append(inputEl).append(buttonEl);
   }
 }
 
@@ -75,10 +78,23 @@ function storeTasks() {
   localStorage.setItem("tasks", JSON.stringify(tasks));
 }
 
-renderTimeBlocks();
+init();
 
-// Automatically update time blocks
+$(".saveBtn").on("click", function() {
+  event.preventDefault();
+  //Get the data index number from the button.
+  let dataIndex = $(this).attr("data-index");
+  let textInput = document.getElementById(`input${dataIndex}`).value;
+  // Add task to array
+  tasks.splice(dataIndex, 1, textInput);
+
+  storeTasks();
+  renderTimeBlocks();
+  
+});
+
+// Automatically update time blocks every five minutes
 setInterval(function(){
   presentHour = parseInt(moment().format("HH"));
   renderTimeBlocks();
-}, 60000);
+}, 300000);
