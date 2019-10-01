@@ -39,14 +39,14 @@ function renderTimeBlocks() {
       inputElStyle = "present";
     }
 
-    let timeBlockEl = $("<form>").attr("class", "input-group row").attr("method", "post");
+    let timeBlockEl = $("<form>").attr("class", "input-group row");
     let hourContainer = $("<div>").attr("class", "col-2");
     let hourEl = $("<div>").attr("class", "hour").text(hourName).css("text-align", "right");
     let inputEl = $("<textarea>").attr("class", `form-control textarea ${inputElStyle}`).attr("type", "text").attr("id", "input" + i).val(taskContent);
     let buttonEl = $("<div>").attr("class", "input-group-append");
     let button = $("<button>").attr("class", "saveBtn").attr("data-index", i);
     let lockIcon = $("<i>").attr("class", "fas fa-lock");
-    // <i class="fas fa-lock"></i>
+
     // Put a time block in the container
     $(".container").append(timeBlockEl);
 
