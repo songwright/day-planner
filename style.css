@@ -71,4 +71,11 @@ textarea{
 }
 
 .form-control {
-  margin: 0 1px 0 0;}
+  margin: 0 1px 0 0;
+}
+
+  @media only screen and (max-width: 640px) {
+    .hour {
+      font-size: 0.75em;
+    }
+  }
