@@ -82,7 +82,7 @@ function storeTasks() {
 
 init();
 
-$(".saveBtn").on("click", function() {
+$(".saveBtn").on("click", function(event) {
   event.preventDefault();
   //Get the data index number from the button.
   let dataIndex = $(this).attr("data-index");
