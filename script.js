@@ -86,7 +86,7 @@ $(".saveBtn").on("click", function() {
   event.preventDefault();
   //Get the data index number from the button.
   let dataIndex = $(this).attr("data-index");
-  let textInput = document.getElementById(`input${dataIndex}`).value;
+  let textInput = $(`#input${dataIndex}`).val();
 
   // Add task to array
   tasks.splice(dataIndex, 1, textInput);
