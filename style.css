@@ -78,4 +78,8 @@ textarea{
     .hour {
       font-size: 0.75em;
     }
+
+    .display-3 {
+      font-size: 2em;
+    }
   }
