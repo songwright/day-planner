@@ -1,5 +1,5 @@
-let currentDay = moment().format('dddd, MMMM Do');
-let timeBlocks = [
+const currentDay = moment().format('dddd, MMMM Do');
+const timeBlocks = [
   {hour: "9AM", time: 9},
   {hour: "10AM", time: 10},
   {hour: "11AM", time: 11},
@@ -10,10 +10,8 @@ let timeBlocks = [
   {hour: "4PM", time: 16},
   {hour: "5PM", time: 17}
 ];
-let tasks = ["", "", "", "", "", "", "", "", ""];
 
-// Put today's date in the header.
-$("#currentDay").append(currentDay);
+let tasks = ["", "", "", "", "", "", "", "", ""];
 
 function renderTimeBlocks() {
   // Clear time blocks element
@@ -80,23 +78,28 @@ function storeTasks() {
   localStorage.setItem("tasks", JSON.stringify(tasks));
 }
 
-init();
 
-$(".saveBtn").on("click", function(event) {
-  event.preventDefault();
-  //Get the data index number from the button.
-  let dataIndex = $(this).attr("data-index");
-  let textInput = $(`#input${dataIndex}`).val();
+$(document).ready(function() {
 
-  // Add task to array
-  tasks.splice(dataIndex, 1, textInput);
+  init();
+  // Put today's date in the header.
+  $("#currentDay").append(currentDay);
 
-  storeTasks();
-  renderTimeBlocks();
-});
+  $(".saveBtn").on("click", function(event) {
+    event.preventDefault();
+    console.log('test');
+    //Get the data index number from the button.
+    let dataIndex = $(this).attr("data-index");
+    let textInput = $(`#input${dataIndex}`).val();
 
-// Automatically update time blocks every five minutes
-setInterval(function(){
-  presentHour = parseInt(moment().format("HH"));
-  renderTimeBlocks();
-}, 300000);
+    // Add task to array
+    tasks.splice(dataIndex, 1, textInput);
+    storeTasks();
+  });
+
+  // Automatically update time blocks every five minutes
+  setInterval(function(){
+    presentHour = parseInt(moment().format("HH"));
+    renderTimeBlocks();
+  }, 300000);
+})
